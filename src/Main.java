@@ -8,14 +8,14 @@ public class Main {
 	 */
 	public static void main(String[] args){
 		try{
-			// TODO: put in your agent here
+			Agent187 killah = new Agent187();
 			Agent agent = new RandomAgent();
 
 			int port=4001;
 			if(args.length>=1){
 				port=Integer.parseInt(args[0]);
 			}
-			GamePlayer gp=new GamePlayer(port, agent);
+			GamePlayer gp=new GamePlayer(port, killah);
 			gp.waitForExit();
 		}catch(Exception ex){
 			ex.printStackTrace();

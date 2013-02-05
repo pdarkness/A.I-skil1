@@ -29,7 +29,7 @@ public class RandomAgent implements Agent
 				if (perceptName.equals("HOME")) {
 					Matcher m = Pattern.compile("\\(\\s*HOME\\s+([0-9]+)\\s+([0-9]+)\\s*\\)").matcher(percept);
 					if (m.matches()) {
-						System.out.println("robot is at " + m.group(1) + "," + m.group(2));
+						System.out.println("robot is f@ at " + m.group(1) + "," + m.group(2));
 					}
 				} else {
 					System.out.println("other percept:" + percept);
