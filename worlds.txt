@@ -1,0 +1,14 @@
+world: estimated size of the state space, length of optimal solution
+vacuumcleaner_obstacle_1: <3200 states, 42
+vacuumcleaner_obstacle_2: <3200 states, 46
+vacuumcleaner_obstacle_7: 137000 states, 226
+vacuumcleaner_obstacle_8: 274000 states, 263
+vacuumcleaner_obstacle_9: 548000 states, 270
+vacuumcleaner_obstacle_10: 1.1 million states, 277
+
+# The following worlds are really big. Tell me if your agent can solve them.
+vacuumcleaner_obstacle_3: 2.2 million states, ?
+vacuumcleaner_obstacle_4: 2.2 million states, ?
+vacuumcleaner_obstacle_5: 2.2 million states, ?
+vacuumcleaner_obstacle_6: 2.2 million states, ?
+
