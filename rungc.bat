@@ -1,3 +1,1 @@
-@echo off
-start java -jar gamecontroller-gui.jar
-exit
+start java -jar gamecontroller-gui.jar &
