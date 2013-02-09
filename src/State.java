@@ -394,7 +394,7 @@ public class State
 
     boolean successor() {
 
-        return currentLocation.equals(startingPoint) && dirtLocations.isEmpty();
+        return dirtLocations.isEmpty();
     }
 
 

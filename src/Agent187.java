@@ -107,7 +107,7 @@ public class Agent187 implements Agent
             }
         //startingState.ResultingState("GO").debug();
         dfs = new StateDFS(startingState);
-        dfs.print();
+
     }
 
     @Override
@@ -121,7 +121,7 @@ public class Agent187 implements Agent
             }
         System.out.println("");
         String[] actions = { "TURN_ON", "TURN_OFF", "TURN_RIGHT", "TURN_LEFT", "GO", "SUCK" };
-        return "TURN_OFF";
+        return dfs.nextMove();
     }
 
 }
