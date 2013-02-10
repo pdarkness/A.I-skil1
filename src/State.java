@@ -121,7 +121,6 @@ public class State
     }
     public List<String> legalMoves()
     {
-
         Stack<String> legalMoves = new Stack<String>();
         for(Location l : dirtLocations)
             if(l.getX() == currentLocation.getX() && l.getY() == currentLocation.getY())
@@ -238,11 +237,10 @@ public class State
                             blocked_right = true;
                         if(currentLocation.getY() == 1)
                             blocked_left = true;
-                        if(1 >= currentLocation.getY())
+                        if(1 >= currentLocation.getX())
                             blocked = true;
                         if(!blocked)
                             legalMoves.push("GO");
-                else blocked = true;
             }
         if(!(blocked_left && blocked_back)  && !(blocked && blocked_left) )
         {
@@ -253,6 +251,8 @@ public class State
 
         return legalMoves;
     }
+
+
     public State ResultingState(String move)
     {
         State resultingState = new State(currentLocation, orientation);
@@ -363,7 +363,6 @@ public class State
                                     if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() + 1) )
                                         {
                                             blocked = true;
-                                            break;
                                         }
                                 if(!blocked)
                                     resultingState.setCurrentLocation(
@@ -394,13 +393,12 @@ public class State
 
     boolean successor() {
 
-        return dirtLocations.isEmpty();
+        return dirtLocations.isEmpty() && currentLocation.equals(startingPoint);
     }
 
 
     @Override
     public boolean equals(Object obj) {
-
         State s = (State) obj;
         if(this.orientation != s.orientation)
             return false;
@@ -408,11 +406,12 @@ public class State
             return false;
         if(this.getDirtLocations().size() != s.getDirtLocations().size())
             return false;
-        if(this.getObstacleLocations().size() != s.getObstacleLocations().size())
-            return false;
-
+        for(int i=0;i<this.getDirtLocations().size();i++)
+        {
+            if( !this.getDirtLocations().get(i).equals(s.getDirtLocations().get(i)))
+                return false;
+        }
         return true;
-
     }
 
     @Override

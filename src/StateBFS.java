@@ -11,7 +11,8 @@ public class StateBFS {
     Queue<String> successMoves;
     List<Node> branches = new ArrayList<Node>();
 
-    public StateBFS(State startingState) {
+    public StateBFS(State startingState)
+    {
         marked = new HashSet<State>();
         Node root = new Node(startingState,"TURN_ON",null);
         successMoves = new LinkedList<String>();

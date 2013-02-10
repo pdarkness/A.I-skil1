@@ -107,7 +107,6 @@ public class Agent187 implements Agent
             }
         //startingState.ResultingState("GO").debug();
         dfs = new StateDFS(startingState);
-
     }
 
     @Override

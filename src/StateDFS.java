@@ -63,6 +63,10 @@ public class StateDFS {
                 branches.add(newNode);
                 dfs(newNode);
             }
+            else {
+                Node newNode = new Node(resultingState,move + " CLASH " + resultingState.hashCode(),current);
+                branches.add(newNode);
+            }
         }
     }
 
