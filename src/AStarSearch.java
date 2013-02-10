@@ -15,12 +15,12 @@ public class AStarSearch implements MoveCalculator {
             }
        }
 
-       AStarSearch(State startingState)
+       public AStarSearch(State startingState)
        {
             successMoves = new Stack<String>();
        }
 
-       void aSearch(Node current)
+       private void aSearch(Node current)
        {
 
        }
