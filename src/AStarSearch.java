@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class AStarSearch implements MoveCalculator {
@@ -20,9 +22,31 @@ public class AStarSearch implements MoveCalculator {
             successMoves = new Stack<String>();
        }
 
-       private void aSearch(Node current)
+       private Node aSearch(Node current)
        {
-
+          int score = h(current.state);
+          if(score == 0)
+          {
+             return current;
+          }
+          List<Node> children = new ArrayList<Node>();
+          for(String move: current.state.legalMoves())
+          {
+              Node newNode = new Node(current.state.ResultingState(move),move,current);
+              children.add(newNode);
+          }
+           Node nodeToExpand = null;
+           int min = Integer.MIN_VALUE;
+           for(Node node : children)
+              {
+                  int nodeScore = h(node.state);
+                  if( score < min)
+                  {
+                      min = score;
+                      nodeToExpand = node;
+                  }
+              }
+           return aSearch(nodeToExpand);
        }
 
        private int h(State s)
