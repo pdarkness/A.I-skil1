@@ -242,11 +242,9 @@ public class State
                         if(!blocked)
                             legalMoves.push("GO");
             }
-        if(!(blocked_left && blocked_back)  && !(blocked && blocked_left) )
-        {
+        //if(!(blocked_left && blocked_back)  && !(blocked && blocked_left)
             legalMoves.push("TURN_LEFT");
-        }
-        if(!(blocked_right && blocked_back)  && !(blocked && blocked_right) )
+        //if(!(blocked_right && blocked_back)  && !(blocked && blocked_right) )
             legalMoves.push("TURN_RIGHT");
 
         return legalMoves;
