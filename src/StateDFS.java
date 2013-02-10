@@ -2,9 +2,8 @@ import java.lang.String;
 import java.lang.System;
 import java.util.*;
 
-public class StateDFS {
-    private HashSet<State> marked;    // marked[v] = is there an s-v path?
-    List<String> queue = new ArrayList<String>();
+public class StateDFS implements MoveCalculator {
+    private HashSet<State> marked;
     Stack<String> successMoves;
     List<Node> branches = new ArrayList<Node>();
 
@@ -19,7 +18,6 @@ public class StateDFS {
         private State state;
         private String move;
         private Node parent;
-        private int cost;
         Node(State state, String move, Node parent)
         {
             this.state=state;

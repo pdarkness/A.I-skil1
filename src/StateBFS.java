@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class StateBFS {
-    private HashSet<State> marked;    // marked[v] = is there an s-v path?
+public class StateBFS implements MoveCalculator {
+    private HashSet<State> marked;
     Stack<String> successMoves;
     List<Node> branches = new ArrayList<Node>();
 
@@ -39,7 +39,7 @@ public class StateBFS {
         {
             Node t = q.poll();
             if( t.state.successor() )
-                return t;
+               return t;
             List<Node> adjacentNodes = new ArrayList<Node>();
             for(String move : t.state.legalMoves())
             {
@@ -52,7 +52,8 @@ public class StateBFS {
                 if( !marked.contains(u.state) )
                 {
                     marked.add(u.state);
-                    q.add(u);
+
+                q.add(u);
                 }
             }
         }
