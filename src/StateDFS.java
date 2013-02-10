@@ -5,7 +5,6 @@ import java.util.*;
 public class StateDFS implements MoveCalculator {
     private HashSet<State> marked;
     Stack<String> successMoves;
-    List<Node> branches = new ArrayList<Node>();
 
     public StateDFS(State startingState) {
         marked = new HashSet<State>();
@@ -41,7 +40,6 @@ public class StateDFS implements MoveCalculator {
             State resultingState = current.state.ResultingState(move);
             if (!marked.contains(resultingState)) {
                 Node newNode = new Node(resultingState,move,current);
-                branches.add(newNode);
                 dfs(newNode);
             }
         }
