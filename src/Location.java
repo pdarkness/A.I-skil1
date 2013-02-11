@@ -5,7 +5,7 @@
  * Time: 22:07
  * To change this template use File | Settings | File Templates.
  */
-public class Location
+public class Location   implements Comparable
 {
     private int x;
     private int y;
@@ -44,5 +44,19 @@ public class Location
             return false;
         return true;
 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Location l = (Location) o;
+        if(this.getY() < l.getY())
+            return -1;
+        if(this.getY()>l.getY())
+            return 1;
+        if(this.getX()<l.getX())
+            return -1;
+        if(this.getX()>l.getX())
+            return 1;
+        return 0;
     }
 }

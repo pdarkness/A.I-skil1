@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
@@ -20,10 +21,14 @@ public class AStarSearch implements MoveCalculator {
        public AStarSearch(State startingState)
        {
             successMoves = new Stack<String>();
+            Node firstNode = new Node(startingState,"TURN_ON",null);
+            aSearch(firstNode).state.debug();
        }
 
        private Node aSearch(Node current)
        {
+          System.out.println(current.move +" " +  current.state.getCurrentLocation().getX() + " " + current.state
+          .getCurrentLocation().getY());
           int score = h(current.state);
           if(score == 0)
           {
@@ -36,13 +41,13 @@ public class AStarSearch implements MoveCalculator {
               children.add(newNode);
           }
            Node nodeToExpand = null;
-           int min = Integer.MIN_VALUE;
+           int min = Integer.MAX_VALUE;
            for(Node node : children)
               {
                   int nodeScore = h(node.state);
-                  if( score < min)
+                  if( nodeScore < min)
                   {
-                      min = score;
+                      min = nodeScore;
                       nodeToExpand = node;
                   }
               }
@@ -51,6 +56,15 @@ public class AStarSearch implements MoveCalculator {
 
        private int h(State s)
        {
+           if(!s.getDirtLocations().isEmpty() )
+           {
+               Location dirt;
+               dirt = s.getDirtLocations().get(0);
+               int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
+               int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
+               int manhattan = difX+difY+1;
+               return manhattan;
+           }
            return 0;
        }
 
