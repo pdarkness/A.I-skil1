@@ -17,7 +17,7 @@ public class Agent187 implements Agent
     static final int WEST = 3;
     private Collection<String> percepts;
     private State startingState;
-    StateDFS dfs;
+    MoveCalculator dfs;
 
 
     int h(State N)
@@ -101,13 +101,8 @@ public class Agent187 implements Agent
             else
                 System.err.println("strange percept that does not match pattern: " + percept);
         }
-        for(String m : startingState.ResultingState("TURN_RIGHT").ResultingState("GO").legalMoves())
-        {
-            System.out.println("Legal: " + m);
-        }
         //startingState.ResultingState("GO").debug();
-        dfs = new StateDFS(startingState);
-        AStarSearch ass = new AStarSearch(startingState);
+        dfs = new AStarSearch(startingState);
     }
 
     @Override

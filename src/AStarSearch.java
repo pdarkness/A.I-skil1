@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class AStarSearch implements MoveCalculator {
-    Stack<String> successMoves;
+    LinkedList<String> successMoves;
     private HashSet<State> marked;
 
     private class Node {
@@ -29,16 +29,16 @@ public class AStarSearch implements MoveCalculator {
        public AStarSearch(State startingState)
        {
            marked = new HashSet<State>();
-            successMoves = new Stack<String>();
+            successMoves = new LinkedList<String>();
             Node firstNode = new Node(startingState,"TURN_ON",null);
-            aSearch(firstNode).state.debug();
+            aSearch(firstNode);
+            successMoves.add("TURN_OFF");
 
        }
 
        private Node aSearch(Node current)
        {
-          System.out.println(current.move +" " +  current.state.getCurrentLocation().getX() + " " + current.state
-          .getCurrentLocation().getY());
+          successMoves.add(current.move);
           int score = h(current);
           if(score == 0)
           {
@@ -74,9 +74,17 @@ public class AStarSearch implements MoveCalculator {
                //int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
                //int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
                //int manhattan = difX+difY+1;
-               int manhattan = 1+target.length();
+               int manhattan = 2+target.length();
                marked = new HashSet<State>();
                return manhattan;
+           }
+           else if(!s.state.getCurrentLocation().equals(s.state.getStartingPoint()))
+           {
+                Location home = s.state.getStartingPoint();
+                Node target = bfs(s,home);
+                int manhattan = 1+target.length();
+               marked = new HashSet<State>();
+                return manhattan;
            }
            return 0;
        }
@@ -111,6 +119,6 @@ public class AStarSearch implements MoveCalculator {
 
        public String nextMove()
        {
-           return "TURN_OFF";
+           return successMoves.poll();
        }
 }
