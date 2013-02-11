@@ -72,8 +72,6 @@ public class AStarSearch implements MoveCalculator {
                Location dirt;
                dirt = s.state.getDirtLocations().get(0);
                Node target = bfs(s,dirt);
-               if(target == null)
-                   s.state.debug();
                //int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
                //int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
                //int manhattan = difX+difY+1;
@@ -117,6 +115,8 @@ public class AStarSearch implements MoveCalculator {
                 }
             }
         }
+        current.state.debug();
+        System.out.println("punktur:" + location.getX() + " " + location.getY() );
         return null;
     }
 

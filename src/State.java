@@ -136,6 +136,11 @@ public class State
         System.out.println(this.getSize().getX() + " " + this.getSize().getY());
         System.out.println("ON:");
         System.out.println(this.turnedOn);
+        System.out.println("Legalmoves:");
+        for(String move : legalMoves())
+        {
+            System.out.println(move);
+        }
     }
     public List<String> legalMoves()
     {
@@ -250,13 +255,18 @@ public class State
         if(! (blocked_left && blocked_back && blocked_right) )
         {
         if( !(blocked_back && blocked_left) )
-            {
-                    legalMoves.push("TURN_LEFT");
-            }
-
-        if(!(blocked_back && blocked_right) )
-            legalMoves.push("TURN_RIGHT");
+        {
+            if(!(blocked && blocked_left) )
+              legalMoves.push("TURN_LEFT");
         }
+        if(!(blocked_back && blocked_right) )
+          {
+            if(!(blocked && blocked_right) )
+                legalMoves.push("TURN_RIGHT");
+          }
+        }
+        if(blocked && blocked_right  && blocked_left)
+            legalMoves.push("TURN_LEFT");
         return legalMoves;
     }
 
