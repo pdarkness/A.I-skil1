@@ -148,16 +148,21 @@ public class State
             }
         boolean blocked = false;
         boolean blocked_back = false;
+        boolean blocked_left = false;
+
         if(orientation == NORTH)
         {
-
             for(Location l : obstacleLocations)
             {
                 if(l.getX() == currentLocation.getX() && l.getY() == (currentLocation.getY() + 1) )
                     blocked = true;
                 if( l.getX()== currentLocation.getX() && l.getY() == (currentLocation.getY()-1) )
                     blocked_back=true;
+                if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX()-1) )
+                    blocked_left = true;
             }
+            if(currentLocation.getX() == 1)
+                blocked_left=true;
             if(currentLocation.getY() == 1)
                 blocked_back = true;
             if(size.getY() <= currentLocation.getY())
@@ -174,7 +179,11 @@ public class State
                     blocked = true;
                 if(l.getX() == currentLocation.getX() && l.getY() == (currentLocation.getY() + 1))
                     blocked_back = true;
+                if(l.getY()==currentLocation.getY() && l.getX()== currentLocation.getX()+1)
+                    blocked_left = true;
             }
+            if(currentLocation.getX()==size.getX())
+                blocked_left=true;
             if(currentLocation.getY() == size.getY())
                 blocked_back=true;
             if(1 >= currentLocation.getY())
@@ -190,7 +199,11 @@ public class State
                     blocked = true;
                 if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() -1) )
                     blocked_back = true;
+                if(l.getX()==currentLocation.getX() && l.getY() == currentLocation.getY()+1)
+                    blocked_left=true;
             }
+            if(currentLocation.getY() == size.getY())
+                blocked_left=true;
             if(currentLocation.getX() == 1)
                 blocked_back = true;
             if(size.getX() <= currentLocation.getX())
@@ -206,7 +219,11 @@ public class State
                     blocked = true;
                 if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() + 1))
                     blocked_back=true;
+                if(l.getX() == currentLocation.getX() && l.getY() == (currentLocation.getY()-1))
+                    blocked_left=true;
             }
+            if(currentLocation.getY()==1)
+                blocked_left=true;
             if(currentLocation.getX() == size.getX())
                 blocked_back=true;
             if(1 >= currentLocation.getX())
