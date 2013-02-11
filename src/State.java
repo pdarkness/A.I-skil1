@@ -147,17 +147,19 @@ public class State
                 return legalMoves;
             }
         boolean blocked = false;
-
+        boolean blocked_back = false;
         if(orientation == NORTH)
         {
 
             for(Location l : obstacleLocations)
             {
                 if(l.getX() == currentLocation.getX() && l.getY() == (currentLocation.getY() + 1) )
-                {
                     blocked = true;
-                }
+                if( l.getX()== currentLocation.getX() && l.getY() == (currentLocation.getY()-1) )
+                    blocked_back=true;
             }
+            if(currentLocation.getY() == 1)
+                blocked_back = true;
             if(size.getY() <= currentLocation.getY())
                 blocked = true;
             if(!blocked)
@@ -169,10 +171,12 @@ public class State
             for(Location l : obstacleLocations)
             {
                 if(l.getX() == currentLocation.getX() && l.getY() == (currentLocation.getY() - 1) )
-                {
                     blocked = true;
-                }
+                if(l.getX() == currentLocation.getX() && l.getY() == (currentLocation.getY() + 1))
+                    blocked_back = true;
             }
+            if(currentLocation.getY() == size.getY())
+                blocked_back=true;
             if(1 >= currentLocation.getY())
                 blocked = true;
             if(!blocked)
@@ -183,10 +187,12 @@ public class State
             for(Location l : obstacleLocations)
             {
                 if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() + 1) )
-                {
                     blocked = true;
-                }
+                if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() -1) )
+                    blocked_back = true;
             }
+            if(currentLocation.getX() == 1)
+                blocked_back = true;
             if(size.getX() <= currentLocation.getX())
                 blocked = true;
             if(!blocked)
@@ -197,10 +203,12 @@ public class State
             for(Location l : obstacleLocations)
             {
                 if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() - 1) )
-                {
                     blocked = true;
-                }
+                if(l.getY() == currentLocation.getY() && l.getX() == (currentLocation.getX() + 1))
+                    blocked_back=true;
             }
+            if(currentLocation.getX() == size.getX())
+                blocked_back=true;
             if(1 >= currentLocation.getX())
                 blocked = true;
             if(!blocked)
