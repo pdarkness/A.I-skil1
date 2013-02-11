@@ -28,16 +28,18 @@ public class AStarSearch implements MoveCalculator {
 
        public AStarSearch(State startingState)
        {
+           marked = new HashSet<State>();
             successMoves = new Stack<String>();
             Node firstNode = new Node(startingState,"TURN_ON",null);
             aSearch(firstNode).state.debug();
+
        }
 
        private Node aSearch(Node current)
        {
           System.out.println(current.move +" " +  current.state.getCurrentLocation().getX() + " " + current.state
           .getCurrentLocation().getY());
-          int score = h(current.state);
+          int score = h(current);
           if(score == 0)
           {
              return current;
@@ -52,7 +54,7 @@ public class AStarSearch implements MoveCalculator {
            int min = Integer.MAX_VALUE;
            for(Node node : children)
               {
-                  int nodeScore = h(node.state);
+                  int nodeScore = h(node);
                   if( nodeScore < min)
                   {
                       min = nodeScore;
@@ -62,17 +64,18 @@ public class AStarSearch implements MoveCalculator {
            return aSearch(nodeToExpand);
        }
 
-       private int h(State s)
+       private int h(Node s)
        {
-           if(!s.getDirtLocations().isEmpty() )
+           if(!s.state.getDirtLocations().isEmpty() )
            {
                Location dirt;
-               dirt = s.getDirtLocations().get(0);
-               Node target = bfs(new Node(s,"",null),dirt);
+               dirt = s.state.getDirtLocations().get(0);
+               Node target = bfs(s,dirt);
                //int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
                //int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
                //int manhattan = difX+difY+1;
                int manhattan = 1+target.length();
+               marked = new HashSet<State>();
                return manhattan;
            }
            return 0;
