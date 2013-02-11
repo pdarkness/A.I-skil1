@@ -38,6 +38,7 @@ public class AStarSearch implements MoveCalculator {
 
        private Node aSearch(Node current)
        {
+          System.out.println(current.move + " " + current.state.getCurrentLocation().getX() + " " + current.state.getCurrentLocation().getY());
           successMoves.add(current.move);
           int score = h(current);
           if(score == 0)
@@ -71,6 +72,8 @@ public class AStarSearch implements MoveCalculator {
                Location dirt;
                dirt = s.state.getDirtLocations().get(0);
                Node target = bfs(s,dirt);
+               if(target == null)
+                   s.state.debug();
                //int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
                //int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
                //int manhattan = difX+difY+1;
