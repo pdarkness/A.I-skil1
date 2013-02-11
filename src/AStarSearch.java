@@ -1,10 +1,8 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class AStarSearch implements MoveCalculator {
     Stack<String> successMoves;
+    private HashSet<State> marked;
 
     private class Node {
             private State state;
@@ -15,6 +13,16 @@ public class AStarSearch implements MoveCalculator {
                 this.state=state;
                 this.move=move;
                 this.parent=parent;
+            }
+            public int length() {
+                Node it = this;
+                int count = 0;
+                while(it != null)
+                {
+                    count++;
+                    it=it.parent;
+                }
+                return count;
             }
        }
 
@@ -60,13 +68,43 @@ public class AStarSearch implements MoveCalculator {
            {
                Location dirt;
                dirt = s.getDirtLocations().get(0);
-               int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
-               int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
-               int manhattan = difX+difY+1;
+               Node target = bfs(new Node(s,"",null),dirt);
+               //int difX = Math.abs(s.getCurrentLocation().getX()-dirt.getX());
+               //int difY = Math.abs(s.getCurrentLocation().getY()-dirt.getY());
+               //int manhattan = difX+difY+1;
+               int manhattan = 1+target.length();
                return manhattan;
            }
            return 0;
        }
+    private Node bfs(Node current,Location location)
+    {
+        Queue<Node> q = new LinkedList<Node>();
+        q.add(current);
+        marked.add(current.state);
+        while(!q.isEmpty())
+        {
+            Node t = q.poll();
+            if( t.state.getCurrentLocation().equals(location))
+                return t;
+            List<Node> adjacentNodes = new ArrayList<Node>();
+            for(String move : t.state.legalMoves())
+            {
+                Node newNode = new Node(t.state.ResultingState(move),move,t);
+                adjacentNodes.add(newNode);
+            }
+            for(Node e : adjacentNodes)
+            {
+                Node u = e;
+                if( !marked.contains(u.state) )
+                {
+                    marked.add(u.state);
+                    q.add(u);
+                }
+            }
+        }
+        return null;
+    }
 
        public String nextMove()
        {
